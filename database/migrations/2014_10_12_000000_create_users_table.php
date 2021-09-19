@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('type',['admin','owner','user'])->default('user');
+            $table->enum('type', ['admin', 'owner', 'user'])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return void 
+     * @return void
      */
     public function down()
     {

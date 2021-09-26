@@ -28,9 +28,6 @@ class CreateCommentsTable extends Migration
             $table->foreign('restaurant_id')->references('id')->on('restaurants')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
-
-
         });
     }
 

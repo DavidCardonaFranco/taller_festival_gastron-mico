@@ -14,4 +14,4 @@
 
     </table>
 </div>
-@endsectio
+@endsection

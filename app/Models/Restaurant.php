@@ -28,7 +28,7 @@ class Restaurant extends Model
 
     public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function category()
@@ -39,5 +39,10 @@ class Restaurant extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function scopeOwned($query, $owner)
+    {
+        return $query->where('user_id', '=', $owner);
     }
 }

@@ -5,8 +5,11 @@
     <div class="container">
         <h1>Nuestros restaurantes</h1>
 
+
         <?php
+
         $rows = $restaurants->count() / 4;
+        echo count($restaurants);
         ?>
 
         @for ($i = 0; $i < $rows; $i++)

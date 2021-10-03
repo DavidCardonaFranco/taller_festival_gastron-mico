@@ -3,9 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+
 use Illuminate\Validation\Rule;
 
-class StoreRestaurantRequest extends FormRequest
+class StoreRestaurantResquest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,19 +26,15 @@ class StoreRestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:posts|max:250',
-            'body' => 'required',
-            'name' => 'required|string|min:5|max:50',
-            'description' => 'required|string|min:10|max:30',
-            'city' => 'required|string|max:250',
-            'phone' => 'required|alpha_dash|min:10|max:10',
+            'name'        => 'required|string|min:5|max:50',
+            'description' => 'required|string|min:10',
+            'city'        => 'required|string|min:5|max:30',
+            'phone'       => 'required|alpha_dash|min:10|max:10',
             'category_id' => 'required|exists:categories,id',
-            'delivery' => [
+            'delivery'    => [
                 'required',
-                Rule::in(['y','n']),
+                Rule::in(['y', 'n']),
             ],
         ];
     }
 }
-
-

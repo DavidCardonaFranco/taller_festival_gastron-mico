@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
 use App\Models\Category;
-use App\Http\Requests\StoreRestaurantRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreRestaurantResquest;
 
 class RestaurantController extends Controller
 {
@@ -18,7 +18,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::orderBy('name', 'asc')->get();
+        $restaurants = Restaurant::owned(Auth::id())->orderBy('name', 'asc')->get();
 
         return view('restaurants.index', compact('restaurants'));
     }
@@ -30,6 +30,13 @@ class RestaurantController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para crear restaurantes.');
+
+            return redirect(route('home'));
+        }
+
         $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
 
         return view("restaurants.create", compact('categories'));
@@ -41,13 +48,28 @@ class RestaurantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRestaurantRequest $request)
+    public function store(StoreRestaurantResquest $request)
     {
-          
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para crear restaurantes.');
+
+            return redirect(route('home'));
+        }
 
         $input = $request->all();
 
-
+        // $validated = $request->validate([
+        //     'name'        => 'required|string|min:5|max:50',
+        //     'description' => 'required|string|min:10',
+        //     'city'        => 'required|string|min:5|max:30',
+        //     'phone'       => 'required|alpha_dash|min:10|max:10',
+        //     'category_id' => 'required|exists:categories,id',
+        //     'delivery'    => [
+        //         'required',
+        //         Rule::in(['y', 'n']),
+        //     ],
+        // ]);
 
         // Restaurant::create($input);
 
@@ -80,7 +102,9 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
+
+        return view("restaurants.edit", compact('categories', 'restaurant'));
     }
 
     /**
@@ -90,9 +114,17 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(StoreRestaurantResquest $request, Restaurant $restaurant)
     {
-        //
+        $input = $request->all();
+
+        $restaurant->fill($input);
+        $restaurant->user_id = Auth::id();
+        $restaurant->save();
+
+        Session::flash('success', 'Restaurante editado exitosamente');
+
+        return redirect(route('restaurants.index'));
     }
 
     /**
@@ -103,17 +135,29 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        //
+        $restaurant->delete();
+
+        Session::flash('success', 'Restaurante removido exitosamente');
+
+        return redirect(route('restaurants.index'));
     }
 
     /////////////////////////////////////////////////////
 
-    public function showFrontPage()
+    public function showFrontPage(Request $request)
     {
-        $restaurants = Restaurant::orderBy('name', 'asc')->get();
+        $filter = $request['filter'] ?? null;
 
-        $restaurantsOwner1 = Restaurant::where('user_id', '=', '1')->orderBy('name', 'asc')->get();
+        if(!isset($request['filter']))
+            $restaurants = Restaurant::orderBy('name', 'asc')->paginate(8);
+        else
+        {
+            $restaurants = Restaurant::orderBy('name', 'asc')->where('category_id', '=', $request['filter'])->paginate(8);
+            $restaurants->appends(['filter' => $filter]);
+        }
 
-        return view('front_page.index', compact('restaurants', 'restaurantsOwner1'));
+        $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
+
+        return view('front_page.index', compact('restaurants', 'categories', 'filter'));
     }
 }

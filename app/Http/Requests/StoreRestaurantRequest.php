@@ -36,6 +36,11 @@ class StoreRestaurantRequest extends FormRequest
                 'required',
                 Rule::in(['y','n']),
             ],
+            'facebook' => 'required|string|max:256',
+            'twitter' => 'required|strin|max:256',
+            'instagram' => 'required|strin|max:256',
+            'youtube' => 'required|strin|max:256',
+            'logo' => 'required|image',
         ];
     }
 }

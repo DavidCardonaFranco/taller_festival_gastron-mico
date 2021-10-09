@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Restaurant;
 use App\Models\Category;
+use App\Models\Restaurant;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Contracts\Validation\Rule;
 use App\Http\Requests\StoreRestaurantResquest;
 
 class RestaurantController extends Controller
@@ -30,8 +33,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
-        {
+        if (Auth::user()->type != 'admin' & Auth::user()->type != 'owner') {
             Session::flash('failure', 'El usuario no tiene permisos para crear restaurantes.');
 
             return redirect(route('home'));
@@ -50,8 +52,7 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantResquest $request)
     {
-        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
-        {
+        if (Auth::user()->type != 'admin' & Auth::user()->type != 'owner') {
             Session::flash('failure', 'El usuario no tiene permisos para crear restaurantes.');
 
             return redirect(route('home'));
@@ -76,7 +77,22 @@ class RestaurantController extends Controller
         $restaurant = new Restaurant();
         $restaurant->fill($input);
         $restaurant->user_id = Auth::id();
+
+        /* //Ver y subir imagen
+        $restaurant->nombreImagen = $request->nombreImagen;
+
+        if ($request->hasFile("logo")) {
+
+            $imagen = $request->file("logo");
+            $nombreimagen = Str::slug($request->nombreImagen).".".$imagen->guessExtension();
+            $ruta = public_path("images/post/");
+            copy($imagen->getRealPath(),$ruta.$nombreimagen);
+            $restaurant->logo = $nombreimagen;
+        }
+ */
+
         $restaurant->save();
+
 
         Session::flash('success', 'Restaurante agregado exitosamente');
 
@@ -148,10 +164,9 @@ class RestaurantController extends Controller
     {
         $filter = $request['filter'] ?? null;
 
-        if(!isset($request['filter']))
+        if (!isset($request['filter']))
             $restaurants = Restaurant::orderBy('name', 'asc')->paginate(8);
-        else
-        {
+        else {
             $restaurants = Restaurant::orderBy('name', 'asc')->where('category_id', '=', $request['filter'])->paginate(8);
             $restaurants->appends(['filter' => $filter]);
         }
@@ -160,4 +175,8 @@ class RestaurantController extends Controller
 
         return view('front_page.index', compact('restaurants', 'categories', 'filter'));
     }
+
+
+
+
 }

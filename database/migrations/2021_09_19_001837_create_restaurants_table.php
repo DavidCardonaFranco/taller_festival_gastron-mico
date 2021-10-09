@@ -22,16 +22,19 @@ class CreateRestaurantsTable extends Migration
             $table->string('phone', 10);
             $table->foreignId('category_id');
             $table->enum('delivery', ['y', 'n']);
-
-            //Completar yo
-            $table->string('schedule', 10)->nullable();
-            $table->decimal('latitude', 7, 4)->nullable();
-            $table->decimal('longitude', 7, 4)->nullable();
-            $table->string('logo', 256)->nullable();
             $table->string('facebook', 256)->nullable();
             $table->string('twitter', 256)->nullable();
             $table->string('instagram', 256)->nullable();
             $table->string('youtube', 256)->nullable();
+
+            //Faltan
+            $table->string('schedule')->nullable();
+            $table->decimal('latitude', 7, 4)->nullable();
+            $table->decimal('longitude', 7, 4)->nullable();
+
+            $table->string('logo')->nullable();
+            $table->string('nombreImagen')->nullable();
+
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

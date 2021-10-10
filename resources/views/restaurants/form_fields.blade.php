@@ -19,15 +19,32 @@
     {{ Form::select('delivery', ['y' => 'Si', 'n' => 'No'], null, ['class' => 'form-control']); }}
 </div>
 <div class="mb">
-    {{ Form::label('schedule', 'Horario de atención', ['class' => 'form-label']) }}
-    {{ Form::text('schedule', null, ['class' => 'form-control', 'maxlength' => 12]) }}
+    <h4>Horario de atención</h4>
+    <h3>Digite primero la hora de inicio y luego de salida( Incluya los dos puntos). </h3>
+</div>
+ <div class="row">
+    <div class="col-3">
+        <p>
+            <label for="schedule1">Horario de inicio</label>
+            <input type="time" id="schedule1">
+        </p>
+
+        {{-- {{ Form::label('schedule1', 'Horario de inicio', ['class' => 'form-label']) }}
+        {{ Form::text('schedule1', null, ['class' => 'form-control', 'maxlength' => 5]) }} --}}
+    </div>
+    <div class="col-3">
+        <label for="schedule2">Horario de salida</label>
+            <input type="time" id="schedule2">
+        {{-- {{ Form::label('schedule2', 'Horario de salida', ['class' => 'form-label']) }}
+        {{ Form::text('schedule2', null, ['class' => 'form-control', 'maxlength' => 5]) }} --}}
+    </div>
 </div>
 <div class="mb mb-3">
     {{ Form::label('category_id', 'Categoría', ['class' => 'form-label']) }}
     {{ Form::select('category_id', $categories, null, ['class' => 'form-control']); }}
 </div>
 <div class="mb">
-    <h4>Redes sociales.</h4>
+    <h4>Redes sociales( OPCIONAL).</h4>
     <h3>Digite el link de sus respectivas páginas.</h3>
 </div>
 <div class="mb">

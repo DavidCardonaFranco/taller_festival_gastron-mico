@@ -29,7 +29,6 @@ class StoreRestaurantResquest extends FormRequest
             'name'        => 'required|string|min:5|max:50',
             'description' => 'required|string|min:10',
             'city'        => 'required|string|min:5|max:30',
-            'schedule'    => 'required|string|min:10|max:12',
             'phone'       => 'required|alpha_dash|min:10|max:10',
             'category_id' => 'required|exists:categories,id',
             'delivery'    => [

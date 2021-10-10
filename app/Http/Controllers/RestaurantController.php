@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Restaurant;
-use Illuminate\Support\Str;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Contracts\Validation\Rule;
 use App\Http\Requests\StoreRestaurantResquest;
 
 class RestaurantController extends Controller
@@ -74,9 +71,6 @@ class RestaurantController extends Controller
 
         // Restaurant::create($input);
 
-        $restaurant = new Restaurant();
-        $restaurant->fill($input);
-        $restaurant->user_id = Auth::id();
 
         /* //Ver y subir imagen
         $restaurant->nombreImagen = $request->nombreImagen;
@@ -91,8 +85,10 @@ class RestaurantController extends Controller
         }
  */
 
+        $restaurant = new Restaurant();
+        $restaurant->fill($input);
+        $restaurant->user_id = Auth::id();
         $restaurant->save();
-
 
         Session::flash('success', 'Restaurante agregado exitosamente');
 
@@ -175,8 +171,4 @@ class RestaurantController extends Controller
 
         return view('front_page.index', compact('restaurants', 'categories', 'filter'));
     }
-
-
-
-
 }

@@ -27,8 +27,11 @@ class CreateRestaurantsTable extends Migration
             $table->string('instagram', 256)->nullable();
             $table->string('youtube', 256)->nullable();
 
+            $table->time('schedule1');
+            $table->time('schedule2');
+
             //Faltan
-            $table->string('schedule')->nullable();
+
             $table->decimal('latitude', 7, 4)->nullable();
             $table->decimal('longitude', 7, 4)->nullable();
 

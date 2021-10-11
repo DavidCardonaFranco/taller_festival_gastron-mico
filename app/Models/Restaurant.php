@@ -38,7 +38,7 @@ class Restaurant extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'restaurant_id');
     }
 
     public function scopeOwned($query, $owner)

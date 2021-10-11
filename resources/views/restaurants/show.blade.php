@@ -41,7 +41,7 @@
 
                 @if ($restaurant->facebook)
                     <div class="btn-group" role="button" aria-label="Basic example">
-                        <a class="btn btn-outline-primary mt-3" href="{{ $restaurant->facebook }}" target="_blank"><i data-feather="facebook"></i></a>
+                        <a class="btln btn-outline-primary mt-3" href="{{ $restaurant->facebook }}" target="_blank"><i data-feather="facebook"></i></a>
 
                     </div>
                 @endif
@@ -65,11 +65,51 @@
                     </div>
                 @endif
                 <br>
+
+                
+                @foreach ($comments as $comment)
+                    <div class="well well bs-component">
+                        <div class="content">
+                            {{!!$comment->content!!}}
+                        </div>
+                    </div>
+                @endforeach
+                {{-- Comentarios --}}
+            <div class="well well bs-component">
+                <form action="/comment" class="form-horizontal" method="POST">
+                    @foreach ($errors->all() as $error)
+                        <p class="alert alert-danger">{{$error}}</p>
+                    @endforeach
+
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{session('status')}}
+                        </div>
+
+                    @endif
+                    @csrf
+                    <input type="hidden" name="restaurant_id" value="{!!$restaurant->id!!}">
+
+                    <fieldset>
+                        <legend>Comentarios</legend>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="reset" class="btn btn-default">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Publicar</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
             </div>
 
         </div>
-
-
 
 
         {{-- Botones para editar y eliminar --}}

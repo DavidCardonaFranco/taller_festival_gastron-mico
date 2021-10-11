@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreRestaurantResquest;
+use App\Models\Comment;
 
 class RestaurantController extends Controller
 {
@@ -72,6 +73,13 @@ class RestaurantController extends Controller
         // Restaurant::create($input);
 
 
+
+
+
+        $restaurant = new Restaurant();
+        $restaurant->fill($input);
+        $restaurant->user_id = Auth::id();
+
         /* //Ver y subir imagen
         $restaurant->nombreImagen = $request->nombreImagen;
 
@@ -83,11 +91,10 @@ class RestaurantController extends Controller
             copy($imagen->getRealPath(),$ruta.$nombreimagen);
             $restaurant->logo = $nombreimagen;
         }
- */
+        */
+        /* Agregar comentario */
 
-        $restaurant = new Restaurant();
-        $restaurant->fill($input);
-        $restaurant->user_id = Auth::id();
+
         $restaurant->save();
 
         Session::flash('success', 'Restaurante agregado exitosamente');
@@ -103,7 +110,8 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('restaurants.show', compact('restaurant'));
+        $comments = $restaurant->comments()->get();
+        return view('restaurants.show', compact('restaurant','comments'));
     }
 
     /**
@@ -115,7 +123,6 @@ class RestaurantController extends Controller
     public function edit(Restaurant $restaurant)
     {
         $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
-
         return view("restaurants.edit", compact('categories', 'restaurant'));
     }
 

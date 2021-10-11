@@ -14,7 +14,7 @@ class commentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(CommentFormRequest $request)
+    public function create(CommentFormRequest $request)
     {
         $comment = new Comment(array(
             'restaurant_id' => $request->get('restaurant_id'),

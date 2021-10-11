@@ -67,7 +67,7 @@
     <h4>Imagen del Restaurante</h4>
     {{-- Imagen --}}
 </div>
-{{-- <div class="row">
+ {{-- <div class="row">
     <div class="col-3">
         {{ Form::label('nombreImagen', 'Ingrese el nombre del logo', ['class' => 'form-label']) }}
         {{ Form::text('nombreImagen', null, ['class' => 'form-control']) }}
@@ -80,11 +80,11 @@
         {{ Form::file('logo', null, ['class' => 'form-data']) }}
     </div>
 
-</div> --}}
+</div>
 
 
 
-{{-- <div class="mb">
+<div class="mb">
     <form method="POST" action="{{route('images')}}" accept-charset="UTF-8" enctype="multipart/form-data">
         {{ csrf_field() }}
         <label for="logo"><b>Logo: </b></label><br>

@@ -66,16 +66,31 @@
                 @endif
                 <br>
 
-
                 @foreach ($comments as $comment)
                     <div class="well well bs-component">
                         <div class="content">
-                            {{!!$comment->content!!}}
+                            {{!!$comments->comment!!}}
                         </div>
                     </div>
                 @endforeach
+
+                {{ Form::open(['route'=>['comments.create'], 'method'=>'post']) }}
+                <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
+                {{Form::label('comment','Comentarios',['class'=>'form-label'])}}
+                {{Form::text('comment',null,['class'=>'form-control'])}}
+                {{-- {{Form::label('score','Valoración',['class'=>'form-label'])}}
+                {{Form::select('score',
+                [1=>'1',2=>'2',3=>'3',4=>'4',5=>'5']null, ['class'=>form-control])}} --}}
+                <div class="row mt-2 justify-content-end">
+                    {{Form::submit ('Publicar',['class'=>'btn btn-primary'])}}
+                    <a href="{{route('home')}}" class="btn btn-default">Cancelar</a>
+                </div>
+
+                {{!! Form::close() !!}}
+
+
                 {{-- Comentarios --}}
-            <div class="well well bs-component">
+            {{-- <div class="well well bs-component">
                 <form route="comment.__invoke" class="form-horizontal" method="POST">
                     @foreach ($errors->all() as $error)
                         <p class="alert alert-danger">{{$error}}</p>
@@ -106,10 +121,10 @@
                         </div>
                     </fieldset>
                 </form>
-            </div>
-            </div>
-
+            </div> --}}
         </div>
+
+    </div>
 
 
         {{-- Botones para editar y eliminar --}}

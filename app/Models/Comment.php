@@ -20,4 +20,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Restaurant::class);
     }
+
+    public function scopeOwned($query, $restaurant)
+    {
+        return $query->where('restaurant_id', '=', $restaurant);
+    }
 }

@@ -76,7 +76,7 @@
                 @endforeach
                 {{-- Comentarios --}}
             <div class="well well bs-component">
-                <form route="comment.newComment" class="form-horizontal" method="POST">
+                <form route="comment.__invoke" class="form-horizontal" method="POST">
                     @foreach ($errors->all() as $error)
                         <p class="alert alert-danger">{{$error}}</p>
                     @endforeach

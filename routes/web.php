@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\commentController;
+
 
 
 Auth::routes();
@@ -14,7 +15,8 @@ Route::get('/', [App\Http\Controllers\RestaurantController::class, 'showFrontPag
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('restaurants', App\Http\Controllers\RestaurantController::class);
-    /* Route::post('/comment',App\Http\Controllers\CommentsController::class); */
+
+    Route::post('/comments',App\Http\Controllers\commentController::class,'__invoke');
 
 });
 

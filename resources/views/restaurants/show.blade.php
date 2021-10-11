@@ -41,7 +41,7 @@
 
                 @if ($restaurant->facebook)
                     <div class="btn-group" role="button" aria-label="Basic example">
-                        <a class="btln btn-outline-primary mt-3" href="{{ $restaurant->facebook }}" target="_blank"><i data-feather="facebook"></i></a>
+                        <a class="btn btn-outline-primary mt-3" href="{{ $restaurant->facebook }}" target="_blank"><i data-feather="facebook"></i></a>
 
                     </div>
                 @endif
@@ -66,7 +66,7 @@
                 @endif
                 <br>
 
-                
+
                 @foreach ($comments as $comment)
                     <div class="well well bs-component">
                         <div class="content">
@@ -76,7 +76,7 @@
                 @endforeach
                 {{-- Comentarios --}}
             <div class="well well bs-component">
-                <form action="/comment" class="form-horizontal" method="POST">
+                <form route="comment.newComment" class="form-horizontal" method="POST">
                     @foreach ($errors->all() as $error)
                         <p class="alert alert-danger">{{$error}}</p>
                     @endforeach

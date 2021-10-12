@@ -113,7 +113,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-
+        if($category->restaurants->isNotEmpty())
+        {
+            Session::flash('failure', 'Error: No fue posible remover la categoria ya que existen restaurantes de esta categoria');
+            return redirect(route('categories.index'));
+        }
         $category->delete();
 
         Session::flash('success', 'Categoria removida exitosamente');

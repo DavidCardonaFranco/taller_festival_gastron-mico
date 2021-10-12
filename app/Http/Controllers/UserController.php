@@ -113,6 +113,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if($user->restaurants->isNotEmpty())
+        {
+            Session::flash('failure', 'Error: No fue posible eliminar el usuario ya que el usuario es dueño de restaurantes');
+            return redirect(route('users.index'));
+        }
         $user->delete();
 
         Session::flash('success', 'Usuario eliminado exitosamente');

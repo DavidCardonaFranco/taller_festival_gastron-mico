@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\commentController;
+
 
 
 Auth::routes();
@@ -16,8 +17,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('restaurants', App\Http\Controllers\RestaurantController::class);
     Route::resource('categories', App\Http\Controllers\CategoryController::class);
     Route::resource('users', App\Http\Controllers\UserController::class);
-    /* Route::post('/comment',App\Http\Controllers\CommentsController::class); */
-
 });
 
 

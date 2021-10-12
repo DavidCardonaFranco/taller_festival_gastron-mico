@@ -10,7 +10,7 @@
                 </h2>
 
                 <p class="h1">{{ $restaurant->name }}</p>
-                {{-- <img src="{{ asset('images/restaurant.png') }}" class="img-fluid" alt="..."> --}}
+                <img src="{{ asset('images/restaurant.png') }}" class="img-fluid" alt="...">
             </div>
 
             <div class="col">
@@ -65,51 +65,9 @@
                     </div>
                 @endif
                 <br>
-
-
-                @foreach ($comments as $comment)
-                    <div class="well well bs-component">
-                        <div class="content">
-                            {{!!$comment->content!!}}
-                        </div>
-                    </div>
-                @endforeach
-                {{-- Comentarios --}}
-            <div class="well well bs-component">
-                <form route="comment.newComment" class="form-horizontal" method="POST">
-                    @foreach ($errors->all() as $error)
-                        <p class="alert alert-danger">{{$error}}</p>
-                    @endforeach
-
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{session('status')}}
-                        </div>
-
-                    @endif
-                    @csrf
-                    <input type="hidden" name="restaurant_id" value="{!!$restaurant->id!!}">
-
-                    <fieldset>
-                        <legend>Comentarios</legend>
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <button type="reset" class="btn btn-default">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Publicar</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
             </div>
-            </div>
-
         </div>
+    </div>
 
 
         {{-- Botones para editar y eliminar --}}

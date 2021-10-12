@@ -10,7 +10,7 @@
                 </h2>
 
                 <p class="h1">{{ $restaurant->name }}</p>
-                <img src="{{ asset('images/restaurant.png') }}" class="img-fluid" alt="...">
+                {{-- <img src="{{ asset('images/restaurant.png') }}" class="img-fluid" alt="..."> --}}
             </div>
 
             <div class="col">

@@ -65,69 +65,33 @@
                     </div>
                 @endif
                 <br>
-
-                @foreach ($comments as $comment)
-                    <div class="well well bs-component">
-                        <div class="content">
-                            {{!!$comments->comment!!}}
+            </div>
+        </div>
+        {{-- Esto idealmente no queda aca sino dentro del form_fields pero por ahora es lo mejor que se logra, todavia 
+            falta el formulario para poder hacer el CRUD de comentarios --}}
+            @foreach ($comments as $comment)
+            <div class="row">
+                <div class="col md-3 mt-3">
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 ">
+                            <div class="fw-bold">
+                                <div class="row">
+                                    {{ $comment->user->name }}
+                                    @for($i = 0; $i < $comment->score; $i++)
+                                    <i class="fas fa-star"></i>
+                                    @endfor
+                                </div>
+                            </div>
+                            {{ $comment->comment }}
                         </div>
-                    </div>
-                @endforeach
-
-                {{ Form::open(['route'=>['comments.create'], 'method'=>'post']) }}
-                <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
-                {{Form::label('comment','Comentarios',['class'=>'form-label'])}}
-                {{Form::text('comment',null,['class'=>'form-control'])}}
-                {{-- {{Form::label('score','Valoración',['class'=>'form-label'])}}
-                {{Form::select('score',
-                [1=>'1',2=>'2',3=>'3',4=>'4',5=>'5']null, ['class'=>form-control])}} --}}
-                <div class="row mt-2 justify-content-end">
-                    {{Form::submit ('Publicar',['class'=>'btn btn-primary'])}}
-                    <a href="{{route('home')}}" class="btn btn-default">Cancelar</a>
+                        </li>
+                    </ol>
                 </div>
 
-                {{!! Form::close() !!}}
-
-
-                {{-- Comentarios --}}
-            {{-- <div class="well well bs-component">
-                <form route="comment.__invoke" class="form-horizontal" method="POST">
-                    @foreach ($errors->all() as $error)
-                        <p class="alert alert-danger">{{$error}}</p>
-                    @endforeach
-
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{session('status')}}
-                        </div>
-
-                    @endif
-                    @csrf
-                    <input type="hidden" name="restaurant_id" value="{!!$restaurant->id!!}">
-
-                    <fieldset>
-                        <legend>Comentarios</legend>
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <button type="reset" class="btn btn-default">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Publicar</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div> --}}
-        </div>
-
+            </div>
+    @endforeach
     </div>
-
-
-        {{-- Botones para editar y eliminar --}}
 
         <div class="btn-group" role="group" aria-label="Basic example">
 
@@ -136,7 +100,6 @@
             {{ Form::open(['route' => ['restaurants.destroy', $restaurant->id], 'method' => 'delete', 'onsubmit' => 'return confirm(\'¿Esta seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')']) }}
             <button type="submit" class="btn btn-danger mt-3">Remover</button>
             {!! Form::close() !!}
-
-
-
-        @endsection
+        </div>
+    </div>
+@endsection

@@ -32,23 +32,14 @@
                         $restaurant = $restaurants[$i * 4 + $j];
                         ?>
 
-                        <div class="card col-3 mb-3" ">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="{{ asset('images/restaurant.png') }}" class="card-img" width="500px">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $restaurant->name }}</h5>
-                                        <h6 class="text-muted">{{ $restaurant->category->name }}</h6>
-
-                                        {{-- @if ( $restaurant->description != max:50)
-                                        <p class="card-text">{{ $restaurant->description }}</p>
-                                        @endif --}}
-                                        <p class="card-text">{{ $restaurant->description }}</p>
-
-                                        <a href="{{ route("restaurants.show", $restaurant->id) }}" class="btn btn-primary">Visítenos</a>
-                                    </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-3">
+                            <div class="card">
+                                <img src="{{ asset('images/restaurant.png') }}" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $restaurant->name }}</h5>
+                                    <h6 class="text-muted">{{ $restaurant->category->name }}</h6>
+                                    <p class="card-text">{{ $restaurant->description }}</p>
+                                    <a href="{{ route("restaurants.show", $restaurant->id) }}" class="btn btn-primary">Visítenos</a>
                                 </div>
                             </div>
                         </div>

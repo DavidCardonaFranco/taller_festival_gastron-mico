@@ -67,12 +67,14 @@
                 <br>
             </div>
         </div>
+        {{-- Esto idealmente no queda aca sino dentro del form_fields pero por ahora es lo mejor que se logra, todavia 
+            falta el formulario para poder hacer el CRUD de comentarios --}}
             @foreach ($comments as $comment)
             <div class="row">
-                <div class="col">
+                <div class="col md-3 mt-3">
                     <ol class="list-group list-group-numbered">
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2">
+                        <div class="ms-2 ">
                             <div class="fw-bold">
                                 <div class="row">
                                     {{ $comment->user->name }}

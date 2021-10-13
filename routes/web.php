@@ -18,6 +18,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/comments',[App\Http\Controllers\commentController::class,'create'])->name('restaurants.store');
 
+
+    Route::resource('categories', App\Http\Controllers\CategoryController::class);
+    Route::resource('users', App\Http\Controllers\UserController::class);
+
 });
 
 

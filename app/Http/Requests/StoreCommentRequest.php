@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class CommentFormRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +25,8 @@ class CommentFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'required|min:3',
+            'comment' => 'required|string|min:10|max:40',
+            'score' => 'required|tinyint|min:10|max:70',
         ];
     }
 }

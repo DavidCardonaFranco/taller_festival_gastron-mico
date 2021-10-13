@@ -21,8 +21,9 @@ class Comment extends Model
         return $this->belongsTo(Restaurant::class);
     }
 
-    public function scopeOwned($query, $restaurant)
+    public function user()
     {
-        return $query->where('restaurant_id', '=', $restaurant);
+        return $this->belongsTo(User::class);
     }
+
 }

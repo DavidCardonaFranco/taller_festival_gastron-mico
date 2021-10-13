@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -52,9 +53,11 @@ class UserController extends Controller
         }
 
         $input = $request->all();
-
         $user = new User();
         $user->fill($input);
+        $password = $input['password'];
+        Hash::make($password);
+        $user->password = $password;
 
         $user->save();
 

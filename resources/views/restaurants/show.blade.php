@@ -67,10 +67,29 @@
                 <br>
             </div>
         </div>
+            @foreach ($comments as $comment)
+            <div class="row">
+                <div class="col">
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2">
+                            <div class="fw-bold">
+                                <div class="row">
+                                    {{ $comment->user->name }}
+                                    @for($i = 0; $i < $comment->score; $i++)
+                                    <i class="fas fa-star"></i>
+                                    @endfor
+                                </div>
+                            </div>
+                            {{ $comment->comment }}
+                        </div>
+                        </li>
+                    </ol>
+                </div>
+
+            </div>
+    @endforeach
     </div>
-
-
-        {{-- Botones para editar y eliminar --}}
 
         <div class="btn-group" role="group" aria-label="Basic example">
 

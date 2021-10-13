@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\commentController;
+
+use App\Http\Controllers\CommentController;
 
 
 
@@ -16,7 +17,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('restaurants', App\Http\Controllers\RestaurantController::class);
 
-    Route::post('/comments',[App\Http\Controllers\commentController::class,'create'])->name('restaurants.store');
+    Route::resource('comments', App\Http\Controllers\CommentController::class);
 
 
     Route::resource('categories', App\Http\Controllers\CategoryController::class);

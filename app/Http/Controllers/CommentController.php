@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreCommentRequest;
 
@@ -35,9 +36,19 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Comment $comment)
+    public function store(StoreCommentRequest $request)
     {
-        //
+        $inputs = $request->all();
+        $comment = new Comment();
+        $comment->fill($inputs);
+
+        $comment->user_id = Auth::id();
+        $comment->restaurant_id = $inputs['restaurant_id'];
+        $comment->save();
+
+        Session::flash('success', 'Comentario agregado.');
+
+        return redirect()->back();
     }
 
     /**

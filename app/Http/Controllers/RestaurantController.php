@@ -92,7 +92,6 @@ class RestaurantController extends Controller
             $restaurant->logo = $nombreimagen;
         }
         */
-        /* Agregar comentario */
 
 
         $restaurant->save();
@@ -111,7 +110,10 @@ class RestaurantController extends Controller
     public function show(Restaurant $restaurant)
     {
         $comments = $restaurant->comments()->get();
-        return view('restaurants.show', compact('restaurant','comments'));
+        $owner=$restaurant->owner()->get();
+
+        return view('restaurants.show', compact('restaurant','comments','owner'));
+
     }
 
     /**

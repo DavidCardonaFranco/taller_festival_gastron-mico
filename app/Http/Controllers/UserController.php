@@ -55,15 +55,13 @@ class UserController extends Controller
         $input = $request->all();
         $user = new User();
         $user->fill($input);
-        $password = $input['password'];
-        Hash::make($password);
-        $user->password = $password;
+        $user -> password = Hash::make($input['password']);
 
         $user->save();
 
-        Session::flash('success', 'Usuario creado exitosamente');
+        Session::flash('success', 'Usuario creado exitosamente.');
 
-        return redirect(route('home'));
+        return redirect(route('users.index'));
     }
 
     /**

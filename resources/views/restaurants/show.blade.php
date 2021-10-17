@@ -125,12 +125,12 @@
 
         </div>
         <div class="btn-group" role="group" aria-label="Basic example">
-
+            @if (Auth::user()->type == 'admin')
             <a class="btn btn-warning mt-3" href="{{ route('restaurants.edit', $restaurant->id) }}">Editar</a>
-
-            {{ Form::open(['route' => ['restaurants.destroy', $restaurant->id], 'method' => 'delete', 'onsubmit' => 'return confirm(\'¿Está seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')']) }}
-            <button type="submit" class="btn btn-danger mt-3">Remover</button>
-            {!! Form::close() !!}
+                {{ Form::open(['route' => ['restaurants.destroy', $restaurant->id], 'method' => 'delete', 'onsubmit' => 'return confirm(\'¿Está seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')']) }}
+                <button type="submit" class="btn btn-danger mt-3">Remover</button>
+                {!! Form::close() !!}
+            @endif
         </div>
     </div>
 

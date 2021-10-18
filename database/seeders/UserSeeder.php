@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'Andres Esparza Valencia',
-                'email' => 'andres.esparzav@autonoma.edu.co',
+                'name' => 'David Cardona Franco',
+                'email' => 'david.cardonaf@autonoma.edu.co',
                 'password' => Hash::make('hola123'),
                 'type' => 'admin',
                 'created_at' => Carbon::now(),

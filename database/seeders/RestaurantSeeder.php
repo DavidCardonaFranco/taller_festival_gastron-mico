@@ -24,6 +24,8 @@ class RestaurantSeeder extends Seeder
                 'city' => 'Manizales',
                 'phone' => '123',
                 'category_id' => 1,
+                'schedule1' => '11:20',
+                'schedule2' => '20:10',
                 'delivery' => 'y',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -35,6 +37,8 @@ class RestaurantSeeder extends Seeder
                 'city' => 'Pereira',
                 'phone' => '456',
                 'category_id' => 2,
+                'schedule1' => '11:20',
+                'schedule2' => '20:10',
                 'delivery' => 'n',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -46,6 +50,8 @@ class RestaurantSeeder extends Seeder
                 'city' => 'Armenia',
                 'phone' => '890',
                 'category_id' => 3,
+                'schedule1' => '11:20',
+                'schedule2' => '20:10',
                 'delivery' => 'y',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

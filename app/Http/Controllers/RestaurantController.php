@@ -62,7 +62,7 @@ class RestaurantController extends Controller
         $restaurant = new Restaurant();
         $restaurant->fill($input);
         /* Schedule */
-        dd($input);
+  
         /*$restaurant->schedule1 = Carbon::make($input['schedule1']);
         $restaurant->schedule2 = Carbon::make($input['schedule2']); */
         $restaurant->user_id = Auth::id();

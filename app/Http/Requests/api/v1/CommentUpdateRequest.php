@@ -28,8 +28,8 @@ class CommentUpdateRequest extends FormRequest
         return [
             "comment" => "min:3",
             "score" => "numeric|min:1|max:5",
-            "user_id" => "exists:user,id",
-            "restaurant_id" => "exits:restaurant,id"
+            "user_id" => "exists:users,id",
+            "restaurant_id" => "exits:restaurants,id"
         ];
     }
 

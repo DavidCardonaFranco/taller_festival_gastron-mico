@@ -14,16 +14,17 @@ class Comment extends Model
     protected $fillable = [
         'comment',
         'score',
+        'user_id'
     ];
 
     public function restaurant()
     {
-        return $this->belongsTo(Restaurant::class);
+        return $this->hasMany(Restaurant::class, 'user_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class ,'user_id');
     }
 
 }

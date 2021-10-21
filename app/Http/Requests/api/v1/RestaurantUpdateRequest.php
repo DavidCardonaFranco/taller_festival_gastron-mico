@@ -28,8 +28,8 @@ class RestaurantUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
-            "name" => "alpha_dash|min:5|max:50",
+            'user_id' => 'exists:users,id',
+            "name" => "min:5|max:50",
             'description' => 'min:10',
             'city'        => 'min:5|max:30',
             'phone'       => 'alpha_dash|min:10|max:10',

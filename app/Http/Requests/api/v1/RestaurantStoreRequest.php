@@ -43,6 +43,6 @@ class RestaurantStoreRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json(
             $validator->errors(),422
-        ));
+));
     }
 }

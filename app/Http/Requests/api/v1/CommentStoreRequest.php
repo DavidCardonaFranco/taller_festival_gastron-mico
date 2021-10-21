@@ -27,10 +27,10 @@ class CommentStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "comment" => "required|unique:products,name|alpha_dash|min:3",
+            "comment" => "required|min:3",
             "score" => "required|numeric|min:1|max:5",
-            "user_id" => "required|exists:user,id",
-            "restaurant_id" => "required|exits:restaurant,id"
+            "user_id" => "required|exists:users,id",
+            "restaurant_id" => "required|exits:restaurants,id"
         ];
     }
 

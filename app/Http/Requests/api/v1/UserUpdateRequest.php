@@ -6,8 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-
-class CommentStoreRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,15 +26,16 @@ class CommentStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "comment" => "required|min:3",
-            "score" => "required|numeric|min:1|max:5",
-            "user_id" => "required|exists:users,id",
-            "restaurant_id" => "required|exists:restaurants,id"
+            'name' => '|min:5|max:50',
+            'email' => 'min:10|max:70',
+            'password' => 'min:5|max:20',
         ];
     }
 
     public function failedValidation(Validator $validator)
-    {
-    throw new HttpResponseException(response()->json($validator->errors(), 422));
-    }
+ {
+ throw new HttpResponseException(response()->json($validator->errors(),
+422));
+ }
+
 }

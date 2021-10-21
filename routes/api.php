@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\v1\CommentController;
 use App\Http\Controllers\api\v1\RestaurantController;
+use App\Http\Controllers\api\v1\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('v1/comments', CommentController::class);
 Route::apiResource('v1/restaurants', RestaurantController::class);
+Route::apiResource('v1/users', UserController::class);
+
 

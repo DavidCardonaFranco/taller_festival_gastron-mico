@@ -10,13 +10,15 @@ class Restaurant extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
         'description',
         'city',
         'phone',
         'category_id',
         'delivery',
-        'schedule',
+        'schedule1',
+        'schedule2',
         'latitude',
         'longitude',
         'logo',

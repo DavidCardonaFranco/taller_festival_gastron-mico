@@ -25,6 +25,7 @@
                 </div>
                 <br>
 
+                
                 <p> Servimos en {{ $restaurant->city }} en el horario de {{ $restaurant->schedule1 }} -
                     {{ $restaurant->schedule2 }}.<br> </p> {{-- Cambiar schedule --}}
 

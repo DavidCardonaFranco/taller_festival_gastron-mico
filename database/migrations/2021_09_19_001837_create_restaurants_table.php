@@ -27,8 +27,9 @@ class CreateRestaurantsTable extends Migration
             $table->string('instagram', 256)->nullable();
             $table->string('youtube', 256)->nullable();
 
-            $table->time('schedule1');
-            $table->time('schedule2');
+            /* Schedule */
+            $table->string('schedule1')->nullable();
+            $table->string('schedule2')->nullable();
 
             //Faltan
 

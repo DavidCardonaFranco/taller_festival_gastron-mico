@@ -7,6 +7,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\api\v1\CommentStoreRequest;
 use App\Http\Requests\api\v1\CommentUpdateRequest;
+use App\Http\Resources\v1\CommentResource;
 
 
 class CommentController extends Controller
@@ -18,9 +19,9 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comment = Comment::orderBy('score', 'desc')->get();
+        $comments = Comment::orderBy('score', 'desc')->get();
 
-        return response()->json(['data' => $comment], 200);
+        return CommentResource::collection($comments);
        
     }
 
@@ -45,7 +46,9 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        return response()->json(['data' => $comment], 200);
+        return (new CommentResource($comment))
+            ->response()
+            ->setStatusCode(200);
     }
 
     /**

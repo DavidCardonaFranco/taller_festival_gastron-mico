@@ -17,9 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::orderBy('name', 'asc')->get();
+        $users = User::orderBy('name', 'asc')->get();
 
-        return response()->json(['data' => $user], 200);
+        return response()->json(['data' => $users], 200);
     }
 
 

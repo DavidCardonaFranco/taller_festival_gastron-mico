@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\v1\RestaurantStoreRequest;
 use App\Http\Requests\api\v1\RestaurantUpdateRequest;
+use App\Http\Resources\v1\RestaurantResource;
 
 class RestaurantController extends Controller
 {
@@ -17,9 +18,11 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurant = Restaurant::orderBy('name', 'asc')->get();
+        $restaurants = Restaurant::orderBy('name', 'asc')->paginate();
 
-        return response()->json(['data' => $restaurant], 200);
+        //return response()->json(['data' => $restaurant], 200);
+
+        return RestaurantResource::collection($restaurants);
     }
 
 
@@ -44,7 +47,11 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return response()->json(['data' => $restaurant], 200);
+        //return response()->json(['data' => $restaurant], 200);
+
+        return (new RestaurantResource($restaurant))
+            ->response()
+            ->setStatusCode(200);
     }
 
     /**

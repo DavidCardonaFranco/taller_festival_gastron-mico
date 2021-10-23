@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\v1\UserStoreRequest;
 use App\Http\Requests\api\v1\UserUpdateRequest;
+use App\Http\Resources\v1\UserResource;
 
 class UserController extends Controller
 {
@@ -19,7 +20,7 @@ class UserController extends Controller
     {
         $users = User::orderBy('name', 'asc')->get();
 
-        return response()->json(['data' => $users], 200);
+        return UserResource::collection($users);
     }
 
 
@@ -45,7 +46,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json(['data' => $user], 200);
+        return (new UserResource($user))
+            ->response()
+            ->setStatusCode(200);
     }
 
 

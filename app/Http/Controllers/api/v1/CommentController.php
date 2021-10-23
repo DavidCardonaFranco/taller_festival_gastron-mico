@@ -19,7 +19,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::orderBy('score', 'desc')->get();
+        $comments = Comment::orderBy('score', 'desc')->paginate();
 
         return CommentResource::collection($comments);
        

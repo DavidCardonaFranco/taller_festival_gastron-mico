@@ -17,8 +17,10 @@ class CommentResource extends JsonResource
         return [
             'comment' => $this->comment,
             'score' => $this->score,
-            'user_id' => route('users.show', $this->owner->id),
-            'restaurant_id' => route('restaurants.show', $this->restaurant->id)
+            'id' => $this->id,
+            'restaurant' => route('restaurants.show',$this->restaurant_id), /* Nada */
+            'user' => new UserResource($this->user)
         ];
+
     }
 }

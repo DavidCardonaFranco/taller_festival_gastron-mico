@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreCommentRequest;
+use App\Http\Resources\v1\CommentResource;
 
 class CommentController extends Controller
 {

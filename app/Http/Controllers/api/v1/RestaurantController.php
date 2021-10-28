@@ -5,9 +5,10 @@ namespace App\Http\Controllers\api\v1;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\v1\RestaurantResource;
 use App\Http\Requests\api\v1\RestaurantStoreRequest;
 use App\Http\Requests\api\v1\RestaurantUpdateRequest;
-use App\Http\Resources\v1\RestaurantResource;
 
 class RestaurantController extends Controller
 {
@@ -34,7 +35,11 @@ class RestaurantController extends Controller
      */
     public function store(RestaurantStoreRequest $request)
     {
-        $restaurant = Restaurant::create($request->all());
+        /* $restaurant = Restaurant::create($request->all()); */
+        $restaurant = new Restaurant();
+        $restaurant->fill($request->all());
+        $restaurant->user_id = Auth::user()->id;
+        $restaurant->save();
 
         return response()->json(['data' => $restaurant], 201);
     }
